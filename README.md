@@ -7,7 +7,6 @@
 ```bash
 docker-compose up -d
 ```
-
 ### 3. Configuración de Prestashop:
 
 Seleccionamos el idioma a nuestra elección y marcamos siguiente
@@ -46,5 +45,12 @@ mv admin admin123xyz456 # Renombramos la carpeta
 Una vez hecho esos cambios, iniciamos sesión  y ya podríamos entrar como administradores
 
 ![Prestashop como admin](Capturas/Captura5.png)
+
+
+Una vez finalizado, si queremos para el docker-compose escribimos:
+
+```bash
+docker-compose stop
+```
 
 
