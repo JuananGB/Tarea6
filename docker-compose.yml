@@ -1,0 +1,33 @@
+services: # Define los servicios de la configuración docker 
+  db: # Servicio db
+    image: mariadb # imagen mas reciente de mariadb que trabajará como contenedor para la base de datos.
+    volumes:
+      - db_data:/var/lib/mysql  # se crea el volumen db_data , en donde se montará lo que contiene la carpeta /var/lib/mysql.
+    restart: always  # Se reinicia el contenedor en caso de falló.
+    environment: # Variables de enterno, para la configuración inicial de mariadb
+      MYSQL_ROOT_PASSWORD: someprestashop # Contraseña del usuario root de mariadb
+      MYSQL_DATABASE: prestashop  # Base de datos 
+      MYSQL_USER: prestashop_user # Usuario
+      MYSQL_PASSWORD: prestashop_password # Contraseña del usuario
+
+  prestashop: # Servicio prestashop
+    depends_on: # Depende del servicio db
+      - db
+    image: prestashop/prestashop # Imagen oficial de prestashop
+    ports:
+      - "8000:80" # Los puertos en donde se mapeará el contendor prestashop
+    restart: always # se reinicia el contendor en caso de error.
+    environment: # Variables de entorno
+      DB_SERVER: db # servicio de la base de datos
+      DB_USER: prestashop_user  # Usuario para acceder a la base de datos, debe coincidir con el usuario definido en db
+      DB_PASSWD: prestashop_password  # Contraseña para acceder a la base de datos, debe coincidir con la contraseña del servicio db
+      DB_NAME: prestashop # Nombre de la base de datos de prestashop
+volumes:
+  db_data: # Volumen de la base de datos, se usará para guardar los datos de mariadb.
+
+  
+
+
+
+      
+
